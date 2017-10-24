@@ -8,6 +8,9 @@
 
 
 Lab 1:
+```bash
+mongo "mongodb://cluster0-shard-00-00-jxeqq.mongodb.net:27017,cluster0-shard-00-01-jxeqq.mongodb.net:27017,cluster0-shard-00-02-jxeqq.mongodb.net:27017/aggregations?replicaSet=Cluster0-shard-0" --authenticationDatabase admin --ssl -u m121 -p aggregations --norc
+```
 
 ```javascript
 var pipeline = [{ $match : { "imdb.rating" : {$gte : 7}, "genres": {$nin : [ "Crime","Horror"]}, "rated" : { $in : ["PG", "G"]}, "languages" : { $all : ["English", "Japanese"]} } }]
@@ -45,7 +48,9 @@ validateLab1(pipeline)
 
 Lab 3:
 ```javascript
-db.movies.aggregate([ { $project : {count: { $size : { $split : ["$title", " "]} }, title:1 } }, { $match : { count : {$lt:2} } } ]).itcount()
+db.movies.aggregate([ {$project : {count: { $size : { $split : ["$title", " "]} }, title:1 } },
+		      {$match : { count : {$lt:2} } }
+		      ]).itcount()
 ```
 
 Optional Lab:
