@@ -1,0 +1,5 @@
+## `$match`
+
+* we cannot use where
+* match can use indexes to make filetering quickly
+* should come early in the aggregation pipeline

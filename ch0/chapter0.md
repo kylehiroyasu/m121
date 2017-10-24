@@ -62,7 +62,7 @@ As a general rule, operators always show up in the key position.
 There are also some variables to be aware of:
  
 Field Path: `$fieldName` (`$numberOfMoons`) - used to access the field of a given document
-System Variable: `$$UPPERCASE` (`$$CURRENT`) - system level variable
+System Variable: `$$UPPERCASE` (`$$CURRENT` - current document) - system level variable
 User Variable: `$$foo`- user variable, which we temporarily bind to a name
 
 ### Basic Aggregation Stucture and Syntax Rules

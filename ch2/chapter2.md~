@@ -1,0 +1,39 @@
+# Chapter 2: Basic Aggregation - Utility Stages
+
+## `$addFields` and how it is simila to `$project`
+
+Extremely similar to project except it only add news new computed fields or modify existing incoming fields.
+
+This allows us to avoid specifying all the fields we want to exclude/include which can become tedious.
+
+Using `$project` and `$addFields` together in combination allows you to first specify the fields you want to use select and then compute additional transformations on top of them. this is of course a stylistic choice.
+
+```javascript
+// combining ``$project`` with ``$addFields``
+db.solarSystem.aggregate([
+{"$project": {
+    "_id": 0,
+    "name": 1,
+    "gravity": 1,
+    "mass": 1,
+    "radius": 1,
+    "sma": 1}
+},
+{"$addFields": {
+    "gravity": "$gravity.value",
+    "mass": "$mass.value",
+    "radius": "$radius.value",
+    "sma": "$sma.value"
+}}]);
+```
+
+## `geoNear` stage
+
+
+## Cursor-Like Stages
+
+## `$sample` Stage
+
+## Lab: Using Cursor-like Stages
+
+## Lab: Bringing it al together
