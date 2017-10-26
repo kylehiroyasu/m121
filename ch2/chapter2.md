@@ -274,3 +274,20 @@ db.movies.aggregate([
 ## Lab: Bringing it all together
 
 
+```javascript
+db.movies.aggregate([
+	{$match : {awards : {$regex : "^Won [0-9]+ Oscar"}} },
+	{
+		$group : {
+		       _id: null,
+		       "highest_rating": { $max : "$imdb.rating"},
+		       "lowest_rating": { $min : "$imdb.rating"},
+		       "avg_rating": { $avg : "$imdb.rating"},
+		       "deviation": { $stdDevSamp : "$imdb.rating"}
+		}
+	}
+])
+
+//{$project : {awards: 1 } }
+	
+```
