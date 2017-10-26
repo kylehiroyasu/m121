@@ -98,3 +98,54 @@ For all films that won at least 1 Oscar, calculate the standard deviation, highe
 
 HINT - All movies in the collection that won an Oscar begin with a string resembling one of the following in their awards field
 
+
+## `$unwind`
+
+Used to create one document per value in the array.
+
+```javascript
+// finding the top rated genres per year from 2010 to 2015...
+db.movies.aggregate([
+  {
+    "$match": {
+      "imdb.rating": { "$gt": 0 },
+      "year": { "$gte": 2010, "$lte": 2015 },
+      "runtime": { "$gte": 90 }
+    }
+  },
+  {
+    "$unwind": "$genres"
+  },
+  {
+    "$group": {
+      "_id": {
+        "year": "$year",
+        "genre": "$genres"
+      },
+      "average_rating": { "$avg": "$imdb.rating" }
+    }
+  },
+  {
+    "$sort": { "_id.year": -1, "average_rating": -1 }
+  }
+])
+```
+There are two forms short and long:
+
+```javascript
+$unwind: <field path>
+
+
+$unwind: {
+	 path : <field path>,
+	 includeArrayIndex: <string>,
+	 preserveNullAndEmptyArrays: <boolean>
+}
+```
+Using unwind on large documents may cause performance issues so use with care.
+
+## `$lockup`
+
+## `$graphlookup`
+
+## `$
